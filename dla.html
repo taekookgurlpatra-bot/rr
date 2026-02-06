@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Rose Day Ashraf 🌹</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+}
+
+h1 {
+  margin-top: 40px;
+  font-size: 3rem;
+  color: #b3003b;
+  animation: pop 1.5s infinite alternate, glow 2s infinite;
+}
+
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 5px #ff4d6d; }
+  50% { text-shadow: 0 0 20px #ffb3c1; }
+  100% { text-shadow: 0 0 5px #ff4d6d; }
+}
+
+button {
+  padding: 15px 25px;
+  margin: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 15px;
+  background-color: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background-color: #c9184a;
+}
+
+#message {
+  font-size: 1.5rem;
+  color: #660033;
+  margin-top: 20px;
+  min-height: 50px;
+}
+
+.rose, .heart {
+  position: absolute;
+  width: 80px;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.gif-box {
+  margin-top: 30px;
+}
+
+.countdown {
+  font-size: 2rem;
+  margin-top: 20px;
+  color: #b3003b;
+  text-shadow: 1px 1px 3px #ffcccc;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🌹 Happy Rose Day Ashraf 🌹</h1>
+
+<button onclick="showLove()">Click For Surprise 💌</button>
+<button onclick="rainRoses()">Send Roses 🌹</button>
+<button onclick="showGif()">Special Flower For You 🌸</button>
+<button onclick="startCountdown()">Countdown to Rose Day ⏳</button>
+<button onclick="catchTheRoseGame()">Catch The Rose Game 🎮</button>
+
+<div id="message"></div>
+<div class="gif-box" id="gifBox"></div>
+<div class="countdown" id="countdown"></div>
+
+<script>
+const messages = [
+  "Ashraf, you are as special as a beautiful rose 🌹",
+  "Sending you a garden full of happiness 💐",
+  "You make life bloom brighter 🌸",
+  "A rose for you Ashraf, full of love and smiles ❤️"
+];
+
+function showLove() {
+  const msg = messages[Math.floor(Math.random() * messages.length)];
+  document.getElementById("message").innerText = msg;
+  for(let i=0; i<10; i++) createHeart();
+}
+
+function rainRoses() {
+  for (let i = 0; i < 20; i++) {
+    let rose = document.createElement("img");
+    rose.src = "https://media.giphy.com/media/l0HlSNOxJB956qwfK/giphy.gif";
+    rose.classList.add("rose");
+    rose.style.left = Math.random() * window.innerWidth + "px";
+    rose.style.animationDuration = (3 + Math.random() * 5) + "s";
+    document.body.appendChild(rose);
+    setTimeout(() => rose.remove(), 8000);
+  }
+}
+
+function showGif() {
+  const box = document.getElementById("gifBox");
+  box.innerHTML = `<img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" width="250"><p>For You Ashraf 🌹</p>`;
+}
+
+function createHeart() {
+  let heart = document.createElement("img");
+  heart.src = "https://media.giphy.com/media/l41lFw057lAJQMwg0/giphy.gif";
+  heart.classList.add("heart");
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.animationDuration = (2 + Math.random() * 4) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+function startCountdown() {
+  const targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + 1); // next day for demo
+  const countdownEl = document.getElementById('countdown');
+
+  const interval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    if(distance < 0) {
+      clearInterval(interval);
+      countdownEl.innerText = "🌹 Happy Rose Day! 🌹";
+    } else {
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000*60*60));
+      const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+      const seconds = Math.floor((distance % (1000*60)) / 1000);
+      countdownEl.innerText = `Time left: ${hours}h ${minutes}m ${seconds}s ⏳`;
+    }
+  }, 1000);
+}
+
+function catchTheRoseGame() {
+  alert("Catch the rose game starting! Click the roses quickly to win! 🌹");
+  for(let i=0; i<5; i++) {
+    let rose = document.createElement("img");
+    rose.src = "https://media.giphy.com/media/l0HlSNOxJB956qwfK/giphy.gif";
+    rose.style.position = "absolute";
+    rose.style.left = Math.random() * (window.innerWidth-100) + "px";
+    rose.style.top = Math.random() * (window.innerHeight-100) + "px";
+    rose.style.width = "100px";
+    rose.style.cursor = "pointer";
+    document.body.appendChild(rose);
+    rose.onclick = () => {
+      alert('You caught a rose! 🌹❤️');
+      rose.remove();
+    };
+    setTimeout(() => rose.remove(), 8000);
+  }
+}
+</script>
+
+</body>
+</html>
